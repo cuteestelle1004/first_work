@@ -1,0 +1,44 @@
+<!-- food_app/templates/food_app/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Order Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 40px;
+        }
+        .food-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .food-image {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍔 Welcome to Food Order App</h1>
+    <h3>Our Menu:</h3>
+
+    {% for food in foods %}
+        <div class="food-item">
+            <h2>{{ food.name }}</h2>
+            <p><strong>Price:</strong> ₦{{ food.price }}</p>
+            <p><strong>Description:</strong> {{ food.description }}</p>
+            <p><strong>Calories:</strong> {{ food.calories }} kcal</p>
+            {% if food.images %}
+                <img src="{{ food.images.url }}" alt="{{ food.name }}" class="food-image">
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No food items available right now. Please check back later.</p>
+    {% endfor %}
+</body>
+</html>

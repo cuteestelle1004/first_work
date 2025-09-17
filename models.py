@@ -94,19 +94,65 @@
 # make_it_quack(Duck())  # Output: Quack!
 # make_it_quack(Dog())   # Output: Bark like a quack!
 
-student = {"name": "Alice", "age": 21, "grade": "A"}
-print(student["name"])  # Output: Alice
+# student = {"name": "Alice", "age": 21, "grade": "A"}
+# print(student["name"])  # Output: Alice
 
-print(student["age"] == 22)  # Updates age
-student["major"] = "Biology"  # Adds a new key-value pair
-# print(student["major"])
+# print(student["age"] == 22)  # Updates age
+# student["major"] = "Biology"  # Adds a new key-value pair
+# # print(student["major"])
 
-print(student.pop("grade"))  # Removes "grade" key
+# print(student.pop("grade"))  # Removes "grade" key
 
-print(student.popitem())
+# print(student.popitem())
 
-student.clear()
-"age" in student  # Output: True
+# student.clear()
+# "age" in student  # Output: True
+
+# for key in student.keys():
+#     print(key)
+
+# for value in student.values():
+#     print(value)
+
+# for key, value in student.items():
+#     print(key, value)
+
+# new_data = {"graduated": False, "GPA": 3.8}
+# student.update(new_data)
+
+# squares = {x: x ** 2 for x in range(1, 6)}
+# print(squares)  # Output: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# from collections import defaultdict
+# scores = defaultdict(int)
+# scores["Alice"] += 1  # Initializes "Alice" with 0 and then adds 1
+
+try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero.")
+
+try:
+    num = int(input("Enter a number: "))
+    result = 10 / num
+except ValueError:
+    print("Invalid input. Please enter a number.")
+except ZeroDivisionError:
+    print("Cannot divide by zero.")
+
+try: 
+    # Code that may raise an exception
+    pass
+except Exception as e:
+    print("An error occurred:", e)
+
+try:
+    result = 10 / 2
+except ZeroDivisionError:
+    print("Cannot divide by zero.")
+else:
+    print("Division successful:", result)
+
 
 
 
