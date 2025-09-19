@@ -2,35 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cars for Sale</title>
+    <title>Car Dealership | Toyota Cars for Sale</title>
     <style>
         body {
+            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+            color: #333;
         }
 
         header {
             background-color: #2c3e50;
             color: white;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
         .container {
-            max-width: 1000px;
-            margin: 30px auto;
+            max-width: 1200px;
+            margin: 40px auto;
             padding: 0 20px;
+        }
+
+        .intro {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+        }
+
+        .intro h2 {
+            color: #2c3e50;
+        }
+
+        .intro ul {
+            padding-left: 20px;
+        }
+
+        .intro blockquote {
+            border-left: 5px solid #ccc;
+            margin-top: 20px;
+            padding-left: 15px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .car-card {
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             padding: 20px;
-            margin-bottom: 30px;
-            transition: transform 0.2s ease-in-out;
+            transition: transform 0.3s ease;
         }
 
         .car-card:hover {
@@ -45,6 +84,7 @@
         }
 
         .car-title {
+            font-size: 1.2rem;
             color: #2c3e50;
             margin: 0;
         }
@@ -52,46 +92,81 @@
         .price {
             color: #27ae60;
             font-weight: bold;
-            margin: 5px 0;
+            margin: 10px 0;
         }
 
         footer {
             background-color: #2c3e50;
             color: white;
             text-align: center;
-            padding: 10px 0;
-            margin-top: 50px;
+            padding: 20px;
+            margin-top: 60px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Section -->
     <header>
-        <h1>🚗 Available Cars for Sale</h1>
-        <p>Find your next ride today</p>
+        <h1>🚗 Toyota Cars for Sale</h1>
+        <p>Browse the latest Toyota models available at our dealership</p>
     </header>
 
+    <!-- Main Container -->
     <div class="container">
-        {% if cars %}
-            {% for car in cars %}
-                <div class="car-card">
-                    <h2 class="car-title">{{ car.make }} {{ car.model }} ({{ car.year }})</h2>
-                    <p class="price">Price: ${{ car.price }}</p>
-                    <p>{{ car.description }}</p>
-                    {% if car.image %}
-                        <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}">
-                    {% endif %}
+
+        <!-- Dealership Introduction -->
+        <section class="intro">
+            <h2>Welcome to Our Toyota Dealership</h2>
+            <p>Looking for a ride that’s reliable, stylish, and built to last? You’re in the right place. We proudly offer the latest Toyota vehicles — from the sleek new <strong>Camry</strong> to the powerful <strong>Tundra</strong>.</p>
+
+            <h3>🔥 2025 Featured Toyota Models:</h3>
+            <ul>
+                <li><strong>Camry:</strong> Bold and hybrid-ready for your daily drive.</li>
+                <li><strong>Corolla:</strong> Compact, fuel-efficient, and tech-smart.</li>
+                <li><strong>RAV4:</strong> Spacious SUV for the city or the trail.</li>
+                <li><strong>Highlander:</strong> Perfect for family road trips and comfort.</li>
+                <li><strong>Tacoma:</strong> Built tough for any terrain.</li>
+                <li><strong>Tundra:</strong> Full-size performance and bold design.</li>
+            </ul>
+
+            <h3>Why Choose Us?</h3>
+            <ul>
+                <li>No-pressure sales environment</li>
+                <li>Flexible financing options</li>
+                <li>Top-notch Toyota-certified service center</li>
+                <li>Trade-in evaluations on the spot</li>
+            </ul>
+
+            <blockquote>✅ New cars, great deals, and honest advice — that’s how we do it.</blockquote>
+        </section>
+
+        <!-- Car Listings -->
+        <section>
+            {% if cars %}
+                <div class="car-grid">
+                    {% for car in cars %}
+                        <div class="car-card">
+                            <h3 class="car-title">{{ car.make }} {{ car.model }} ({{ car.year }})</h3>
+                            <p class="price">${{ car.price }}</p>
+                            <p>{{ car.description }}</p>
+                            {% if car.image %}
+                                <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        {% else %}
-            <p>No cars available at the moment. Check back soon!</p>
-        {% endif %}
+            {% else %}
+                <p>No cars are available at the moment. Please check back soon!</p>
+            {% endif %}
+        </section>
+
     </div>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Car Dealership Inc. All rights reserved.</p>
+        <p>&copy; 2025 Your Toyota Dealership. All rights reserved.</p>
     </footer>
 
 </body>
 </html>
-
