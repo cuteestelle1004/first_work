@@ -5,9 +5,12 @@ from .models import Food
 def home(request):
     return HttpResponse("buying food has never been easier!")
 
-def sleep(request):
-    return HttpResponse("Welcome to the Food App!")
+def rice(request):
+    return render(request, 'rice.html')
 
+def pasta(request):
+    foods = Food.objects.filter(category='pasta')
+    return render(request, 'pasta.html', {'foods': foods})
 
 def price(request):
     foods = Food.objects.all()  # get all food items from the database

@@ -20,6 +20,9 @@ class Food(models.Model):
     description = models.TextField(max_length=500)
     images = models.ImageField(null=True, blank=True)
     calories = models.PositiveIntegerField()
+    category = models.CharField(max_length=50, default='general')  # ✅ New field
+
+
 
     def __str__(self):
         return self.name
