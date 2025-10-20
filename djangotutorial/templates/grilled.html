@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">{{ title }}</h2>
+
+    <div class="row g-4">
+        {% for food in foods %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                {% if food.image %}
+                    <img src="{{ food.image.url }}" class="card-img-top" alt="{{ food.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ food.name }}</h5>
+                    <p class="card-text">{{ food.description }}</p>
+                    <p class="fw-bold text-success">₦{{ food.price }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center text-muted py-5">
+            <p>No {{ title }} available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

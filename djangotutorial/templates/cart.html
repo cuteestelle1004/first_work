@@ -1,0 +1,123 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | FoodieExpress</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .cart-header {
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    .table th, .table td {
+      vertical-align: middle;
+    }
+    .btn-remove {
+      background-color: #dc3545;
+      border: none;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .btn-remove:hover {
+      background-color: #b02a37;
+    }
+    .btn-clear {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .btn-clear:hover {
+      background-color: #5a6268;
+    }
+    .btn-continue {
+      background-color: #ff6b35;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .btn-continue:hover {
+      background-color: #e55a2b;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="cart-header">
+    <h2 class="fw-bold text-dark">🛒 Your Shopping Cart</h2>
+    <p class="text-muted">Review your selected meals and proceed to checkout.</p>
+  </div>
+
+  {% if items %}
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>Image</th>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr class="text-center">
+          <td style="width: 100px;">
+            {% if item.food.image %}
+              <img src="{{ item.food.image.url }}" alt="{{ item.food.name }}" class="img-fluid rounded" style="max-height: 80px;">
+            {% else %}
+              <img src="{% static 'images/no-image.jpg' %}" alt="No image" class="img-fluid rounded" style="max-height: 80px;">
+            {% endif %}
+          </td>
+          <td><strong>{{ item.food.name }}</strong></td>
+          <td>₦{{ item.food.price|floatformat:2|intcomma }}</td>
+          <td>{{ item.quantity }}</td>
+          <td><strong>₦{{ item.total_price|floatformat:2|intcomma }}</strong></td>
+          <td>
+            <a href="{% url 'remove_from_cart' item.food.id %}" class="btn-remove">Remove</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr class="fw-bold text-center">
+          <td colspan="4" class="text-end">Total Amount:</td>
+          <td colspan="2" class="text-success fs-5">₦{{ total_price|floatformat:2|intcomma }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-between mt-4">
+    <a href="{% url 'home' %}" class="btn btn-continue">← Continue Shopping</a>
+    <a href="{% url 'clear_cart' %}" class="btn-clear">🗑 Clear Cart</a>
+  </div>
+
+  {% else %}
+  <div class="text-center py-5">
+    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+    <h5 class="text-muted">Your cart is empty!</h5>
+    <a href="{% url 'home' %}" class="btn btn-continue mt-3">Browse Menu</a>
+  </div>
+  {% endif %}
+</div>
+
+</body>
+</html>
